@@ -1,0 +1,20 @@
+{
+  "name": "node_express-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "This is a personal Rest API project following tutorial by : https://www.youtube.com/watch?v=l8WPWK9mS5M\r It is to built an Rest API with Node Js and Express as well as PostMan. It is a CRUD API tutorial.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Anaturuchi Iroapali",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

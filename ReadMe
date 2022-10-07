@@ -1,0 +1,103 @@
+- REST - Representation State Transfer
+- It is all about communication between client and server
+
+- Restful web service is a service that uses REST APIs to communicate
+- Rest APIs are simple and standardized
+- They are scalable and stateless: You can make modifications as you scale
+- They have high performace due to caching support even with scale
+- The main parts or building blocks of rest APIs is the request from client and the response that comes from the server to the client
+- REST APIs are usually used for CRUD operations as http operations/methods
+- CREATE - POST
+- READ - GET
+- UPDATE - PUT/PATCH
+- Delete - DELETE
+- operation, Endpoint, parameters/body, head are parts of the http request
+
+This is a personal Rest API project following tutorial by : https://www.youtube.com/watch?v=l8WPWK9mS5M
+It is to built an Rest API with Node Js and Express as well as PostMan. It is a CRUD API tutorial.
+
+07/Oct/02022 Anaturuchi Iroapali
+
+Steps:
+
+- You should be using the latest node. v14 and above. You can check your node version vy : node -v
+
+1. Create the folder.
+2. Open terminal and run: npm init -y
+3. This creates a package.json file with some info about this project.
+4. Create an index.js file
+5. Install Express: npm install --save express. This creates a node module folder as well as a package-lock.json file
+6. Add the the "type":"module" to the first part of your packaage.json where you have name, version etc
+7. Take in post request bodies by importing: import bodyParser from "body-parser";
+8. Initialize out app()
+9. Specify the port we will be running on . In this case we used: const PORT = 5000. This can be any number. Avoid 3000 as it is usually the frontend port on local server.
+10. Make the app to start listening on the specified port
+11. install nodemon so that you do not have to kill the server and reopen it each time to get: npm install --save-dev nodemon.
+
+- We used the -dev because we will be using the dependency only on our local machine. After this install, you will now see devDependencies inside our package.json with "nodemon": "^2.0.20" inside
+
+12. Currently, we have a test script inside our package.json that we need to remove and write a start script instead, this is for us to be able to run our app using nodemon:
+
+Before:
+"scripts": {
+"test": "echo \"Error: no test specified\" && exit 1"
+},
+
+After:
+
+"scripts": {
+"start": "nodemon index.js"
+},
+
+- Now we close the package.json file and start our app again using: npm start
+- We see this:
+  [nodemon] 2.0.20
+  [nodemon] to restart at any time, enter `rs`
+  [nodemon] watching path(s): _._
+  [nodemon] watching extensions: js,mjs,json
+  [nodemon] starting `node index.js`
+  Server running on port: http://localhost:5000
+
+- now when we make chnages to our code like: "Server Now Running..." and save it, nodemon auto restarts the app for us without us doing so manually
+
+- At this point we have successfully created a basic express server using nodejs. you can visit the server port by using the url provided: http://localhost:5000
+
+- You will see : "Cannot GET /" on the page that opens. This is because we are yet to create routes that requests can be sent to.
+- So above the app.listen(), we create an app.get() with call back function in it with the route that the user will hit, in our first case we will use '/' for the home page
+
+- Save, go back and refresh the site and now we get the message we passed: "Hello, this is Anatu Green's API response"
+
+- Remeber thaat browsers can only make get requests, if you visit gistgate.com, you made a get request to it to googles '/', that is her home route
+
+- But we will now make our API have routes that will correspond to other things we want the user to be able to do when they request to us.
+
+- We will be handling users. This is something that is used in almost all applications. We will make five different routes
+
+1. Get /users - find all users
+2. Post /users - creates a user
+3. Get users/:id - finds a user details
+4. Delete /users/:id - deletes a user
+5. patch /users:id updates a user
+
+image.png
+
+- Remember that json objects must have keys with "" and no trailing commas( that is commas that come after the last otem in an object). But if you copy that data into js it becomes an object and the double quotes that cover the keys will need to go away.
+
+- Remember to install a json formater extension in your browser so that you can view json on browser properly
+
+- We also create a route.post() route to get data from the frontend like the one that users enter in forms
+- We cannot test post requests because when a route is entered in a browser, only a get request can be made. So we go for a postman software. Download and install
+
+- Install npm uuid to generate unique user ids for your users
+
+- Note that our routers were like this:
+
+router.get("/:id", (req, res) => {
+const { id } = req.params;
+const foundUser = users.find((user) => user.id === id);
+res.send(foundUser);
+});
+
+- But we do decide to separate concerns by makin the callback functions in a place of their own. Inside a folder called controllers
+
+- Written by Anaturuchi Iroapali - 7th October 2022
